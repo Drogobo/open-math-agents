@@ -1,0 +1,13 @@
+import OMAReductions.R_OeisA135508_conjecture_R1
+
+-- Step OeisA135508.conjecture.R1.H1: hypothesis H1 of reduction OeisA135508.conjecture.R1
+-- Credit: @Drogobo
+-- H1 := ∀ n : ℕ, 4 ≤ n → 3 ∣ x n
+
+theorem OMA.solution : OMA.R_OeisA135508_conjecture_R1.H1 := by
+  intro n hn
+  induction n, hn using Nat.le_induction with
+  | base => show 3 ∣ OeisA135508.x 4; decide
+  | succ k hk ih =>
+    exact dvd_trans ih (OMA.R_OeisA135508_conjecture_R1.x_dvd_succ k (by omega))
+
